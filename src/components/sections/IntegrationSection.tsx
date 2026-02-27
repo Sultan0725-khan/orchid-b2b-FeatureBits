@@ -72,6 +72,7 @@ const IntegrationSection: React.FC = () => {
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_13.png"
                 alt="Webshop integration"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#1e293b]/90 via-[#1e293b]/40 to-transparent" />
@@ -112,6 +113,7 @@ const IntegrationSection: React.FC = () => {
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_14.png"
                 alt="Delivery channels"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#1e293b]/90 via-[#1e293b]/40 to-transparent" />
@@ -151,6 +153,7 @@ const IntegrationSection: React.FC = () => {
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_15.png"
                 alt="Marketing campaigns"
                 fill
+                sizes="100vw"
                 className="object-cover opacity-25 transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b]/95 via-[#1e293b]/50 to-transparent" />
