@@ -97,6 +97,7 @@ const ManagementSection: React.FC = () => {
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png"
                 alt="Dashboard AI Visual"
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover opacity-40 transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
@@ -152,6 +153,7 @@ const ManagementSection: React.FC = () => {
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_12.png"
                 alt="Management Alarm Visual"
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover opacity-50 transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
