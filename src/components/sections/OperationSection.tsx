@@ -63,11 +63,11 @@ const features: Feature[] = [
   {
     id: "membership",
     title: "Membership",
-    description: "Kunde wird zum Stammkunde. Sammelen Sie Kundendaten nach dem Bezahl Vorgang. Sammelen Sie Kunden-Bewertungen und Posten Sie auf Google-Maps, Sozial Media, Trip-Advisor etc. Belohnen Sie Ihre Gäste mit Digitale Membership-Programme, Treuepunkte und Gutscheine zur Kundenbindung.",
-    highlightText: "Membership-Programme mit Treuepunkten, Digitale Gutscheine & Rabattcodes, Kontaktdaten automatisch sammeln (Email, Name), Gezielte Kampagnen an Stammkunden",
+    description: "Kunde wird zum Stammkunde. Sammeln Sie Kundendaten nach dem Bezahlvorgang. Sammeln Sie Kunden-Bewertungen und posten Sie diese auf Google-Maps, Social Media, Trip-Advisor etc. Belohnen Sie Ihre Gäste mit digitalen Membership-Programmen, Treuepunkten und Gutscheinen zur Kundenbindung.",
+    highlightText: "Membership-Programme mit Treuepunkten, Digitale Gutscheine & Rabattcodes, Kontaktdaten automatisch sammeln, Gezielte Kampagnen an Stammkunden",
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Upselling03-5.jpg", // Placeholder image
     icon: UsersRound,
-    tags: ["Stammkunden", "Gutscheine", "Kampagnen", "Loyalty", "Gutscheine", "Kampagnen"]
+    tags: ["Stammkunden", "Gutscheine", "Kampagnen", "Loyalty", "Digitale Programme", "Kundenbindung"]
   },
   {
     id: "kasse",
