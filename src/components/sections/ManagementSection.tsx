@@ -200,6 +200,7 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
 
 export default function ManagementSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { amount: 0.1, once: false });
 
   return (
     <div id="management" ref={containerRef} className="bg-[#334155] scroll-mt-20">
@@ -218,6 +219,11 @@ export default function ManagementSection() {
             </motion.div>
             
             <motion.h2 
+              animate={isInView ? { 
+                scale: [1, 1.1, 1], 
+                color: ["#ffffff", "#f97316", "#ffffff"],
+                transition: { duration: 1.5, delay: 0.2 }
+              } : {}}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
