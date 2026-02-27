@@ -60,6 +60,15 @@ const features: Feature[] = [
     tags: ["Online & Vor-Ort", "Apple & Google Pay", "TSE Integration"]
   },
   {
+    id: "membership",
+    title: "Membership",
+    description: "Kunde wird zum Stammkunde. Sammelen Sie Kundendaten nach dem Bezahl Vorgang. Sammelen Sie Kunden-Bewertungen und Posten Sie auf Google-Maps, Sozial Media, Trip-Advisor etc. Belohnen Sie Ihre Gäste mit Digitale Membership-Programme, Treuepunkte und Gutscheine zur Kundenbindung.",
+    highlightText: "Membership-Programme mit Treuepunkten, Digitale Gutscheine & Rabattcodes, Kontaktdaten automatisch sammeln (Email, Name), Gezielte Kampagnen an Stammkunden",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Upselling03-5.jpg", // Placeholder image
+    icon: UsersRound,
+    tags: ["Stammkunden", "Gutscheine", "Kampagnen", "Loyalty", "Gutscheine", "Kampagnen"]
+  },
+  {
     id: "kasse",
     title: "Kasse",
     description: "Alle Bestellungen laufen direkt in die Kasse -",
@@ -67,6 +76,15 @@ const features: Feature[] = [
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Kasse-7.jpeg",
     icon: Receipt,
     tags: ["POS Integration", "Weniger Fehler", "Einfacher Abschluss"]
+  },
+  {
+    id: "kellner_modus",
+    title: "Kellner Modus",
+    description: "Bestellungsaufnahme durch Kellner für die älterer Kundschaft als Fallback ohne QR-Code scannen. Manuelle Eingabe durch Service Personal ins Handy oder Tablet. Bestellungen landen genauso in Küche & Bar.",
+    highlightText: "Einheitlicher Workflow für alle Bestellwege",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg", // Placeholder
+    icon: Smartphone,
+    tags: ["Manuell", "Fallback", "Flexibel", "Klassicher Service"]
   },
   {
     id: "bondruck",
