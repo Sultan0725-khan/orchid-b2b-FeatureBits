@@ -31,9 +31,9 @@ const ScrollPlane = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
     ["10%", "50%", "85%", "25%", "75%", "25%", "75%", "25%", "75%", "50%", "85%", "25%", "75%", "25%", "75%", "25%", "75%", "50%", "15%", "50%", "50%"]
   );
 
-  // Agile flight dynamics - reduced rotation and bobbing
-  const totalRotate = useTransform(smoothProgress, (v) => v * 1440); // 4 full turns instead of 20
-  const bobbing = useTransform(smoothProgress, (v) => Math.sin(v * 60) * 10); // Reduced amplitude and frequency
+  // Agile flight dynamics - reduced rotation and bobbing as requested
+  const totalRotate = useTransform(smoothProgress, (v) => v * 720); // 2 full turns over the whole page
+  const bobbing = useTransform(smoothProgress, (v) => Math.sin(v * 40) * 5); // Half amplitude and lower frequency
 
   return (
     <div className="absolute inset-0 pointer-events-none z-[70] hidden lg:block overflow-hidden">
