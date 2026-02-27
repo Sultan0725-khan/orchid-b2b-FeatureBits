@@ -10,7 +10,7 @@ import {
   Receipt, 
   Printer, 
   Activity, 
-  BellAlert,
+  Bell,
   Send
 } from "lucide-react";
 
@@ -22,11 +22,18 @@ interface FeatureCardProps {
   icon: React.ElementType;
   tags: string[];
   className?: string;
+  index: number;
 }
 
-const FeatureCard = ({ title, description, highlightText, image, icon: Icon, tags, className = "" }: FeatureCardProps) => {
+const FeatureCard = ({ title, description, highlightText, image, icon: Icon, tags, className = "", index }: FeatureCardProps) => {
   return (
-    <div className={`group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 flex flex-col min-h-[220px] ${className}`}>
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className={`group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 flex flex-col min-h-[220px] ${className}`}
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image 
@@ -36,7 +43,7 @@ const FeatureCard = ({ title, description, highlightText, image, icon: Icon, tag
           className="object-cover transition-transform duration-700 opacity-20 group-hover:scale-105 group-hover:opacity-30"
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-[#1e293b]/40 to-transparent pointer-events-none" />
       </div>
 
       <div className="relative z-10 h-full flex flex-col p-6 md:p-8">
@@ -66,47 +73,12 @@ const FeatureCard = ({ title, description, highlightText, image, icon: Icon, tag
           ))}
         </div>
       </div>
-    </div>
-  );
-};
-
-const PaperPlanePath = ({ scrollYProgress }: { scrollYProgress: any }) => {
-  // Define path manually to snake through the grid
-  const path = "M 10 100 C 300 100, 300 300, 600 300 S 900 500, 1200 500";
-  
-  // Transform progress into movement along a custom path logic
-  const x = useTransform(scrollYProgress, [0, 1], ["5%", "95%"]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], ["10%", "40%", "70%", "90%"]);
-  const rotate = useTransform(scrollYProgress, [0, 0.2, 0.5, 0.8, 1], [15, 45, -15, 30, 10]);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-30 hidden lg:block overflow-visible">
-      <motion.div
-        style={{
-          left: x,
-          top: y,
-          rotate: rotate,
-        }}
-        className="absolute text-primary"
-      >
-        <Send size={40} fill="currentColor" className="drop-shadow-[0_0_15px_rgba(249,115,22,0.6)]" />
-      </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function OperationSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
 
   return (
     <section id="operation" ref={containerRef} className="relative py-24 md:py-32 bg-[#2d3748] overflow-hidden">
@@ -132,13 +104,11 @@ export default function OperationSection() {
         </div>
 
         <div className="relative">
-          {/* Animated Paper Plane */}
-          <PaperPlanePath scrollYProgress={smoothProgress} />
-
           {/* Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto lg:auto-rows-[auto]">
             {/* Scannen & Bestellen - Large row span */}
             <FeatureCard 
+              index={0}
               className="lg:col-span-1 lg:row-span-1"
               title="Scannen & Bestellen"
               description="Online direkt am Tisch bestellen"
@@ -150,6 +120,7 @@ export default function OperationSection() {
 
             {/* Upselling */}
             <FeatureCard 
+              index={1}
               title="Upselling"
               description="Promotions, Rabatte und Produktempfehlungen beim Check-out"
               highlightText="steigern den Bonwert"
@@ -160,6 +131,7 @@ export default function OperationSection() {
 
             {/* Bezahlen */}
             <FeatureCard 
+              index={2}
               title="Bezahlen"
               description="Schnell bezahlen per Smartphone oder in Bar vor Ort -"
               highlightText="Verarbeitung von verifizierten Bestellungen"
@@ -170,6 +142,7 @@ export default function OperationSection() {
 
             {/* Kasse */}
             <FeatureCard 
+              index={3}
               title="Kasse"
               description="Alle Bestellungen laufen direkt in die Kasse -"
               highlightText="ohne manuelle Doppelerfassung"
@@ -180,6 +153,7 @@ export default function OperationSection() {
 
             {/* Bondruck */}
             <FeatureCard 
+              index={4}
               title="Bondruck"
               description="Automatischer Bondruck für"
               highlightText="Küche & Bar."
@@ -190,6 +164,7 @@ export default function OperationSection() {
 
             {/* Live Tracking */}
             <FeatureCard 
+              index={5}
               title="Live Tracking"
               description="Monitor in Küchen & Bar mit Status und"
               highlightText="intelligentem Zeit-Countdown pro Bestellung."
@@ -200,12 +175,13 @@ export default function OperationSection() {
 
             {/* Alarm & Benachrichtigung - Highlighted or larger */}
             <FeatureCard 
+              index={6}
               className="md:col-span-2 lg:col-span-3"
               title="Alarm & Benachrichtigung"
               description="Echtzeit-Warnungen bei"
               highlightText="überschrittener Zubereitungszeit"
               image="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Alarm_20__20Benachrichtigung02-10.png"
-              icon={BellAlert}
+              icon={Bell}
               tags={["Alarm bei Verzögerung", "Performance steigern", "Echtzeit Benachrichtigungen"]}
             />
           </div>
