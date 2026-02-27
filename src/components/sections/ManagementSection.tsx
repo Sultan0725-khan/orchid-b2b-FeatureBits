@@ -1,249 +1,247 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import React, { useRef } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { 
   LayoutDashboard, 
   FileText, 
   Bell, 
   Users, 
   ShoppingCart, 
-  Sparkles 
-} from 'lucide-react';
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
+  BrainCircuit
+} from "lucide-react";
 
-/**
- * ManagementSection Component
- * 
- * Focuses on AI-driven management features with glassmorphism cards.
- * Implements a complex bento-grid layout for Dashboard, Report, Alarms, Personal, and Einkauf.
- */
+interface Feature {
+  id: string;
+  title: string;
+  description: string;
+  highlightText?: string;
+  image: string;
+  icon: React.ElementType;
+  tags: string[];
+}
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  })
+const features: Feature[] = [
+  {
+    id: "dashboard",
+    title: "Dashboard",
+    description: "Alle wichtigen Kennzahlen an einem Ort.",
+    highlightText: "KPIs zentral steuern",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png",
+    icon: LayoutDashboard,
+    tags: ["KPIs zentral", "Schnelle Entscheidungen", "Echtzeit-Daten"]
+  },
+  {
+    id: "report",
+    title: "Report",
+    description: "Automatisierte Reports für alle Übersichten.",
+    highlightText: "Datenbasiert entscheiden",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png", // Reuse or placeholder
+    icon: FileText,
+    tags: ["Automatisierung", "Excel-Export", "Analyse-Tools"]
+  },
+  {
+    id: "mgmt_alarm",
+    title: "Management Alarme",
+    description: "Engpässe und Verzögerungen sofort sichtbar.",
+    highlightText: "Reagieren statt Agieren",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_12.png",
+    icon: Bell,
+    tags: ["KPI-Alerts", "Bottlenecks sichtbar", "SLA-Eskalation"]
+  },
+  {
+    id: "personal",
+    title: "Personal",
+    description: "Schichtplanung und Kommunikation ohne Chaos.",
+    highlightText: "Digital & Flexibel",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_12.png", // Placeholder
+    icon: Users,
+    tags: ["Schichtplanung", "Weniger Lücken", "Team-Chat"]
+  },
+  {
+    id: "einkauf",
+    title: "Einkauf",
+    description: "Bestände und Nachbestellung im Blick.",
+    highlightText: "Weniger Lebensmittelabfall",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png", // Placeholder
+    icon: ShoppingCart,
+    tags: ["Automatisiert", "Exportfähig", "Low-Stock Überblick"]
+  }
+];
+
+const FeatureOverviewCard = ({ feature, index }: { feature: Feature; index: number }) => {
+  const Icon = feature.icon;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+      onClick={() => {
+        document.getElementById(`feature-${feature.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }}
+      className="cursor-pointer group flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-primary/40 transition-all duration-300"
+    >
+      <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+        <Icon size={20} className="text-primary group-hover:text-white" />
+      </div>
+      <span className="font-bold text-sm md:text-base text-white/90 group-hover:text-white">{feature.title}</span>
+      <ArrowRight size={14} className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+    </motion.div>
+  );
 };
 
-const ManagementSection: React.FC = () => {
+const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: number }) => {
+  const isEven = index % 2 !== 0; // Alternate from operation section
+  const Icon = feature.icon;
+
   return (
-    <section id="management" className="relative py-24 bg-[#334155] overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[20%] right-[10%] w-80 h-80 bg-blue-500/10 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
-            <motion.h2 
-              initial={{ opacity: 0, x: -20 }}
+    <section 
+      id={`feature-${feature.id}`}
+      className="py-24 md:py-32 relative overflow-hidden"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}>
+          {/* Content */}
+          <div className="flex-1 w-full max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 flex items-center gap-4"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
             >
-              Management
-              <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-primary animate-pulse" />
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-lg md:text-xl text-muted-foreground leading-relaxed"
-            >
-              AI-Assistenz hilft Ihnen die richtigen Entscheidungen zu treffen. Steuern Sie effizient Ihr Restaurant zum Erfolg durch intelligente AI, Reports, Trends und Transparenz.
-            </motion.p>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20">
+                  <Icon size={32} className="text-primary" />
+                </div>
+                <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent" />
+              </div>
+              
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                {feature.title}
+              </h3>
+              
+              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
+                {feature.description}
+                {feature.highlightText && (
+                  <span className="text-primary font-bold ml-1">{feature.highlightText}</span>
+                )}
+              </p>
+              
+              <div className="space-y-4 mb-10">
+                {feature.tags.map((tag, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <CheckCircle2 size={20} className="text-primary shrink-0" />
+                    <span className="text-white/70 font-medium">{tag}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <button className="group flex items-center gap-2 text-primary font-bold text-lg hover:underline transition-all">
+                Details ansehen
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
           </div>
           
-          <div className="flex flex-wrap gap-3">
-            {['Alarm bei Verzögerung', 'Performance steigern', 'Echtzeit Benachrichtigungen'].map((tag, i) => (
-              <motion.span 
-                key={tag}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-primary/90 whitespace-nowrap"
-              >
-                {tag}
-              </motion.span>
-            ))}
+          {/* Image */}
+          <div className="flex-1 w-full">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, rotate: isEven ? 2 : -2 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="relative aspect-video lg:aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl group"
+            >
+              <Image 
+                src={feature.image}
+                alt={feature.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+              
+              <div className="absolute top-6 right-6 p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 text-white font-bold flex items-center gap-2">
+                 <BrainCircuit className="text-primary" size={20} />
+                 AI Powered
+              </div>
+            </motion.div>
           </div>
-        </div>
-
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[280px]">
-          
-          {/* Dashboard Card - Large Feature */}
-          <motion.div 
-            custom={0}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card"
-          >
-            <div className="absolute inset-0 z-0">
-              <Image 
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png"
-                alt="Dashboard AI Visual"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-40 transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
-            </div>
-            <div className="relative z-10 h-full p-8 flex flex-col justify-end">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  <LayoutDashboard className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Dashboard</h3>
-              </div>
-              <p className="text-foreground/90 font-medium text-lg leading-tight mb-6">
-                Alle wichtigen Kennzahlen an einem Ort.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20">KPIs zentral</span>
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20">Schnelle Entscheidungen</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Report Card - Vertical Content Card */}
-          <motion.div 
-            custom={1}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-4 md:row-span-1 glass-card p-8 group"
-          >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <FileText className="w-6 h-6" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-primary mb-2">Report</h3>
-                <p className="text-muted-foreground text-sm">Automatisierte Reports für alle Übersichten.</p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Management Alarme Card - Half Width Visual */}
-          <motion.div 
-            custom={2}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card"
-          >
-            <div className="absolute inset-0 z-0">
-              <Image 
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_12.png"
-                alt="Management Alarm Visual"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-50 transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
-            </div>
-            <div className="relative z-10 h-full p-8 flex flex-col justify-end">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  <Bell className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Management Alarme</h3>
-              </div>
-              <p className="text-foreground/90 font-medium text-lg leading-tight mb-6">
-                Engpässe und Verzögerungen sofort sichtbar.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30">KPI-Alerts</span>
-                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30">Bottlenecks sichtbar</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Personal Card - Large Content with Background */}
-          <motion.div 
-            custom={3}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <Users className="w-6 h-6" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-primary mb-2">Personal</h3>
-                <p className="text-muted-foreground text-sm font-medium">Schichtplanung und Kommunikation ohne Chaos.</p>
-              </div>
-            </div>
-            <div className="flex gap-2 mt-4">
-              <span className="px-3 py-1 text-[10px] uppercase tracking-wider font-bold rounded bg-primary/10 text-primary border border-primary/20">Schichtplanung</span>
-              <span className="px-3 py-1 text-[10px] uppercase tracking-wider font-bold rounded bg-primary/10 text-primary border border-primary/20">Weniger Lücken</span>
-            </div>
-          </motion.div>
-
-          {/* Einkauf Card - Full Width on Mobile, Grid Tile on Desktop */}
-          <motion.div 
-            custom={4}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <ShoppingCart className="w-6 h-6" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-primary mb-2">Einkauf</h3>
-                <p className="text-muted-foreground text-sm">Bestände und Nachbestellung im Blick.</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-4">
-              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">Automatisiert</span>
-              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">Exportfähig</span>
-              <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">Low-Stock Überblick</span>
-            </div>
-          </motion.div>
-
         </div>
       </div>
-
-      <style jsx global>{`
-        .glass-card {
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 1.5rem;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .glass-card:hover {
-          border-color: rgba(249, 115, 22, 0.4);
-          transform: translateY(-8px);
-          background: rgba(255, 255, 255, 0.08);
-          box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 18px 36px -18px rgba(0, 0, 0, 0.5);
-        }
-      `}</style>
+      
+      {/* Background decoration */}
+      <div className={`absolute top-1/2 ${isEven ? '-right-1/4' : '-left-1/4'} -translate-y-1/2 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-[160px] pointer-events-none opacity-50`} />
     </section>
   );
 };
 
-export default ManagementSection;
+export default function ManagementSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div id="management" ref={containerRef} className="bg-[#334155] scroll-mt-20">
+      {/* Section Introduction */}
+      <section className="py-24 md:py-32 relative overflow-hidden border-b border-white/5">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-8"
+            >
+              <Sparkles size={14} className="animate-pulse" />
+              Intelligente Steuerung
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight"
+            >
+              Management
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-xl md:text-2xl text-white/60 leading-relaxed font-medium"
+            >
+              AI-Assistenz hilft Ihnen die richtigen Entscheidungen zu treffen. Steuern Sie effizient Ihr Restaurant zum Erfolg.
+            </motion.p>
+          </div>
+
+          {/* Overview Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            {features.map((feature, idx) => (
+              <FeatureOverviewCard key={feature.id} feature={feature} index={idx} />
+            ))}
+          </div>
+        </div>
+        
+        {/* Background elements */}
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none -translate-x-1/2 translate-y-1/2" />
+      </section>
+
+      {/* Detailed Subsections */}
+      <div className="relative">
+        {/* Paper Plane Guide Line */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/0 via-primary/20 to-primary/0 hidden lg:block -translate-x-1/2 pointer-events-none" />
+        
+        {features.map((feature, idx) => (
+          <FeatureDetailSection key={feature.id} feature={feature} index={idx} />
+        ))}
+      </div>
+    </div>
+  );
+}
