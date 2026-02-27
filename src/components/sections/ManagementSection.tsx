@@ -1,9 +1,12 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, 
   FileText, 
-  BellRing, 
+  Bell, 
   Users, 
   ShoppingCart, 
   Sparkles 
@@ -15,6 +18,19 @@ import {
  * Focuses on AI-driven management features with glassmorphism cards.
  * Implements a complex bento-grid layout for Dashboard, Report, Alarms, Personal, and Einkauf.
  */
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  })
+};
 
 const ManagementSection: React.FC = () => {
   return (
@@ -29,23 +45,37 @@ const ManagementSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 flex items-center gap-4">
+            <motion.h2 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 flex items-center gap-4"
+            >
               Management
               <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-primary animate-pulse" />
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-lg md:text-xl text-muted-foreground leading-relaxed"
+            >
               AI-Assistenz hilft Ihnen die richtigen Entscheidungen zu treffen. Steuern Sie effizient Ihr Restaurant zum Erfolg durch intelligente AI, Reports, Trends und Transparenz.
-            </p>
+            </motion.p>
           </div>
           
           <div className="flex flex-wrap gap-3">
-            {['Alarm bei Verzögerung', 'Performance steigern', 'Echtzeit Benachrichtigungen'].map((tag) => (
-              <span 
+            {['Alarm bei Verzögerung', 'Performance steigern', 'Echtzeit Benachrichtigungen'].map((tag, i) => (
+              <motion.span 
                 key={tag}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-primary/90 whitespace-nowrap"
               >
                 {tag}
-              </span>
+              </motion.span>
             ))}
           </div>
         </div>
@@ -54,7 +84,14 @@ const ManagementSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[280px]">
           
           {/* Dashboard Card - Large Feature */}
-          <div className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card">
+          <motion.div 
+            custom={0}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card"
+          >
             <div className="absolute inset-0 z-0">
               <Image 
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_11.png"
@@ -79,10 +116,17 @@ const ManagementSection: React.FC = () => {
                 <span className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20">Schnelle Entscheidungen</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Report Card - Vertical Content Card */}
-          <div className="md:col-span-4 md:row-span-1 glass-card p-8 group">
+          <motion.div 
+            custom={1}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-4 md:row-span-1 glass-card p-8 group"
+          >
             <div className="flex items-start gap-4 mb-4">
               <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <FileText className="w-6 h-6" />
@@ -92,10 +136,17 @@ const ManagementSection: React.FC = () => {
                 <p className="text-muted-foreground text-sm">Automatisierte Reports für alle Übersichten.</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Management Alarme Card - Half Width Visual */}
-          <div className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card">
+          <motion.div 
+            custom={2}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-4 md:row-span-2 group relative overflow-hidden glass-card"
+          >
             <div className="absolute inset-0 z-0">
               <Image 
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_12.png"
@@ -108,7 +159,7 @@ const ManagementSection: React.FC = () => {
             <div className="relative z-10 h-full p-8 flex flex-col justify-end">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                  <BellRing className="w-6 h-6" />
+                  <Bell className="w-6 h-6" />
                 </div>
                 <h3 className="text-2xl font-bold text-white">Management Alarme</h3>
               </div>
@@ -120,10 +171,17 @@ const ManagementSection: React.FC = () => {
                 <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30">Bottlenecks sichtbar</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Personal Card - Large Content with Background */}
-          <div className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between">
+          <motion.div 
+            custom={3}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between"
+          >
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <Users className="w-6 h-6" />
@@ -137,10 +195,17 @@ const ManagementSection: React.FC = () => {
               <span className="px-3 py-1 text-[10px] uppercase tracking-wider font-bold rounded bg-primary/10 text-primary border border-primary/20">Schichtplanung</span>
               <span className="px-3 py-1 text-[10px] uppercase tracking-wider font-bold rounded bg-primary/10 text-primary border border-primary/20">Weniger Lücken</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Einkauf Card - Full Width on Mobile, Grid Tile on Desktop */}
-          <div className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between">
+          <motion.div 
+            custom={4}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="md:col-span-4 md:row-span-1 glass-card p-8 group flex flex-col justify-between"
+          >
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-xl bg-primary/20 border border-primary/30 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <ShoppingCart className="w-6 h-6" />
@@ -155,16 +220,8 @@ const ManagementSection: React.FC = () => {
               <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">Exportfähig</span>
               <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary border border-primary/20">Low-Stock Überblick</span>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
-
-        {/* Floating Paper Plane Path (Abstract Representation for static export) */}
-        <div className="absolute top-[30%] -right-10 w-24 h-24 text-primary opacity-30 transform -rotate-12 hidden lg:block">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-            <path d="m22 2-7 20-4-9-9-4Z" />
-            <path d="M22 2 11 13" />
-          </svg>
         </div>
       </div>
 
