@@ -81,11 +81,11 @@ const features: Feature[] = [
   {
     id: "kellner_modus",
     title: "Kellner Modus",
-    description: "Bestellungsaufnahme durch Kellner für die älterer Kundschaft als Fallback ohne QR-Code scannen. Manuelle Eingabe durch Service Personal ins Handy oder Tablet. Bestellungen landen genauso in Küche & Bar.",
+    description: "Bestellungsaufnahme durch Kellner für die ältere Kundschaft als Fallback ohne QR-Code scannen. Manuelle Eingabe durch Service-Personal ins Handy oder Tablet. Bestellungen landen genauso in Küche & Bar.",
     highlightText: "Einheitlicher Workflow für alle Bestellwege",
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg", // Placeholder
     icon: Smartphone,
-    tags: ["Manuell", "Fallback", "Flexibel", "Klassicher Service"]
+    tags: ["Manuell", "Fallback", "Flexibel", "Klassischer Service"]
   },
   {
     id: "bondruck",
@@ -117,8 +117,8 @@ const features: Feature[] = [
   {
     id: "notifikation",
     title: "Notifikation",
-    description: "Bleiben Sie immer informiert auch wenn Sie nicht vorort sind. Whats-App Benachrichtigungen werden an Managment und Inhaber in Echtzeit versendet bei Problemen im Ablauf.",
-    highlightText: "Schreiten Sie proaktive ein bevor der Gast verloren geht durch zu lange Wartezeiten.",
+    description: "Bleiben Sie immer informiert, auch wenn Sie nicht vor Ort sind. WhatsApp-Benachrichtigungen werden an Management und Inhaber in Echtzeit versendet bei Problemen im Ablauf.",
+    highlightText: "Schreiten Sie proaktiv ein, bevor der Gast verloren geht durch zu lange Wartezeiten.",
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Alarm_20__20Benachrichtigung02-10.png", // Placeholder
     icon: MessageSquare,
     tags: ["WhatsApp", "Echtzeit", "Proaktiv", "Management-Info"]
