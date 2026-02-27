@@ -24,19 +24,16 @@ const ScrollPlane = ({ containerRef }: { containerRef: React.RefObject<HTMLDivEl
     restDelta: 0.001
   });
 
-  // More complex snaking path x-coordinates for a longer page
+  // More complex snaking path x-coordinates to follow the new layout
   const x = useTransform(
     smoothProgress,
     [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1],
-    ["15%", "50%", "85%", "50%", "15%", "50%", "85%", "50%", "15%", "50%", "15%", "50%", "85%", "50%", "15%", "50%", "85%", "50%", "15%", "50%", "50%"]
+    ["10%", "50%", "85%", "25%", "75%", "25%", "75%", "25%", "75%", "50%", "85%", "25%", "75%", "25%", "75%", "25%", "75%", "50%", "15%", "50%", "50%"]
   );
 
-  // Dynamic rotation following the path direction
-  // totalRotate uses a simpler accumulation for rotation
-  const totalRotate = useTransform(smoothProgress, (v) => v * 7200); // 20 full turns over the whole scroll
-
-  // Bobbing animation for y-coordinate to make it feel more "flight-like"
-  const bobbing = useTransform(smoothProgress, (v) => Math.sin(v * 100) * 20);
+  // Agile flight dynamics - reduced rotation and bobbing
+  const totalRotate = useTransform(smoothProgress, (v) => v * 1440); // 4 full turns instead of 20
+  const bobbing = useTransform(smoothProgress, (v) => Math.sin(v * 60) * 10); // Reduced amplitude and frequency
 
   return (
     <div className="absolute inset-0 pointer-events-none z-[70] hidden lg:block overflow-hidden">
