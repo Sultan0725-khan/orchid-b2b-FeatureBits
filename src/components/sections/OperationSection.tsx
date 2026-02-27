@@ -113,6 +113,15 @@ const features: Feature[] = [
     image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Alarm_20__20Benachrichtigung02-10.png",
     icon: Bell,
     tags: ["Performance Boost", "Push Alerts", "Krisenmanagement"]
+  },
+  {
+    id: "notifikation",
+    title: "Notifikation",
+    description: "Bleiben Sie immer informiert auch wenn Sie nicht vorort sind. Whats-App Benachrichtigungen werden an Managment und Inhaber in Echtzeit versendet bei Problemen im Ablauf.",
+    highlightText: "Schreiten Sie proaktive ein bevor der Gast verloren geht durch zu lange Wartezeiten.",
+    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Alarm_20__20Benachrichtigung02-10.png", // Placeholder
+    icon: MessageSquare,
+    tags: ["WhatsApp", "Echtzeit", "Proaktiv", "Management-Info"]
   }
 ];
 
