@@ -26,15 +26,20 @@ interface Feature {
 }
 
 const features: Feature[] = [
-  {
-    id: "bestellen",
-    title: "Scannen & Bestellen",
-    description: "Online direkt am Tisch bestellen",
-    highlightText: "- ohne zu Warten - einfach durch scannen eines QR-Codes",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg",
-    icon: QrCode,
-    tags: ["In-House Online Bestellungen", "Direkt an Küche/Bar", "Kontaktlos"]
-  },
+    {
+      id: "bestellen",
+      title: "Scannen & Bestellen",
+      description: "Bieten Sie Ihren Gästen den Komfort, direkt am Tisch zu bestellen – ganz ohne Wartezeit. Durch einfaches Scannen eines QR-Codes wird der Bestellprozess beschleunigt und Ihr Service-Team spürbar entlastet.",
+      highlightText: "Effizient, kontaktlos und fehlerfrei.",
+      image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg",
+      icon: QrCode,
+      tags: [
+        "QR-Codes pro Tisch: Nummer eingeben, erstellen, fertig",
+        "Sofortiger Download & einfache Bereitstellung",
+        "Keine Wartezeiten & weniger Missverständnisse",
+        "Optimierte Laufwege & reduzierter Personalaufwand"
+      ]
+    },
   {
     id: "upselling",
     title: "Upselling",
