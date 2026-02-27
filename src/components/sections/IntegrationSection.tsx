@@ -8,7 +8,6 @@ import {
   Truck, 
   Megaphone, 
   Link2,
-  CheckCircle2,
   ArrowRight,
   Globe,
   Zap
