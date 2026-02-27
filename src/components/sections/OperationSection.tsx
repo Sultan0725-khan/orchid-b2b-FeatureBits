@@ -13,7 +13,8 @@ import {
   Bell,
   ArrowRight,
   UsersRound,
-  Smartphone
+  Smartphone,
+  MessageSquare
 } from "lucide-react";
 
 interface Feature {
