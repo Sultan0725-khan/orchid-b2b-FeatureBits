@@ -97,10 +97,13 @@ const FeatureOverviewCard = ({ feature, index }: { feature: Feature; index: numb
 const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: number }) => {
   const isEven = index % 2 !== 0; // Alternate from operation section
   const Icon = feature.icon;
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { amount: 0.3, once: false });
 
   return (
     <section 
       id={`feature-${feature.id}`}
+      ref={sectionRef}
       className="py-24 md:py-32 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,9 +111,8 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
             {/* Content */}
             <div className="flex-1 w-full max-w-2xl">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ opacity: 0, x: -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -120,25 +122,45 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
                   <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent" />
                 </div>
                 
-                <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                <motion.h3 
+                  animate={isInView ? { 
+                    scale: [1, 1.05, 1], 
+                    color: ["#ffffff", "#f97316", "#ffffff"],
+                    transition: { duration: 1.5, delay: 0.5 }
+                  } : {}}
+                  className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight"
+                >
                   {feature.title}
-                </h3>
+                </motion.h3>
                 
                 <div className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
                   <p>{feature.description}</p>
                   {feature.highlightText && (
-                    <p className="text-primary font-bold mt-2">{feature.highlightText}</p>
+                    <span className="text-primary font-bold mt-6 block text-2xl md:text-3xl leading-tight">
+                      {feature.highlightText}
+                    </span>
                   )}
                 </div>
                 
                 <div className="flex flex-wrap gap-3 mt-10">
                   {feature.tags.map((tag, idx) => (
-                    <div 
+                    <motion.div 
                       key={idx} 
-                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-semibold hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                      animate={isInView ? { 
+                        boxShadow: ["0 0 0px #f97316", "0 0 20px #f97316", "0 0 0px #f97316"],
+                        borderColor: ["rgba(255,255,255,0.1)", "rgba(249,115,22,1)", "rgba(255,255,255,0.1)"],
+                        color: ["rgba(255,255,255,0.7)", "rgba(249,115,22,1)", "rgba(255,255,255,0.7)"],
+                        scale: [1, 1.1, 1]
+                      } : {}}
+                      transition={{ 
+                        duration: 1.2, 
+                        delay: 0.8 + (idx * 0.15),
+                        ease: "easeInOut"
+                      }}
+                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-semibold transition-all duration-300"
                     >
                       {tag}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -147,10 +169,9 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
             {/* Image */}
             <div className="flex-1 w-full">
               <motion.div
-                initial={{ opacity: 0, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                initial={{ opacity: 0, x: 200 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 200 }}
+                transition={{ duration: 1, ease: "easeOut" }}
                 className="relative aspect-video lg:aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl group"
               >
                 <Image 
