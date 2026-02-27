@@ -29,15 +29,15 @@ const features: Feature[] = [
     {
       id: "bestellen",
       title: "Scannen & Bestellen",
-      description: "Bieten Sie Ihren Gästen den Komfort, direkt am Tisch zu bestellen – ganz ohne Wartezeit. Durch einfaches Scannen eines QR-Codes wird der Bestellprozess beschleunigt und Ihr Service-Team spürbar entlastet.",
-      highlightText: "Effizient, kontaktlos und fehlerfrei.",
+      description: "Revolutionieren Sie den Bestellprozess: Online direkt am Tisch bestellen – ohne Wartezeit, einfach durch Scannen eines QR-Codes. So entlasten Sie Ihr Service-Personal spürbar.",
+      highlightText: "QR-Codes für jeden Tisch: Erstellen, downloaden, fertig.",
       image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg",
       icon: QrCode,
       tags: [
-        "QR-Codes pro Tisch: Nummer eingeben, erstellen, fertig",
-        "Sofortiger Download & einfache Bereitstellung",
-        "Keine Wartezeiten & weniger Missverständnisse",
-        "Optimierte Laufwege & reduzierter Personalaufwand"
+        "Tischnummer eingeben & QR-Code sofort erstellen",
+        "Einfacher Download & schnelle Bereitstellung",
+        "Keine Wartezeiten & keine Missverständnisse",
+        "Optimierte Laufwege & reduzierter Personalbedarf"
       ]
     },
   {
