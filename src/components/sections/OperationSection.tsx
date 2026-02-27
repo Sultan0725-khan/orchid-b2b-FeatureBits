@@ -34,10 +34,10 @@ const features: Feature[] = [
       image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/Bestellen-4.jpg",
       icon: QrCode,
       tags: [
-        "Tischnummer eingeben & QR-Code sofort erstellen",
-        "Einfacher Download & schnelle Bereitstellung",
-        "Keine Wartezeiten & keine Missverständnisse",
-        "Optimierte Laufwege & reduzierter Personalbedarf"
+        "Kein Warten",
+        "Keine Missverständnisse",
+        "Weniger Laufwege",
+        "Weniger Personal"
       ]
     },
   {
