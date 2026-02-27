@@ -11,7 +11,9 @@ import {
   Printer, 
   Activity, 
   Bell,
-  ArrowRight
+  ArrowRight,
+  UsersRound,
+  Smartphone
 } from "lucide-react";
 
 interface Feature {
