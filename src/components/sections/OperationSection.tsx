@@ -11,7 +11,6 @@ import {
   Printer, 
   Activity, 
   Bell,
-  CheckCircle2,
   ArrowRight
 } from "lucide-react";
 
