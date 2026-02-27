@@ -10,9 +10,7 @@ import {
   Users, 
   ShoppingCart, 
   Sparkles,
-  CheckCircle2,
   ArrowRight,
-  TrendingUp,
   BrainCircuit
 } from "lucide-react";
 
