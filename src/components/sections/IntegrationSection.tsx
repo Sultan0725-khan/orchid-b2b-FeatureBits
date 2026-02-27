@@ -87,72 +87,69 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}>
-          {/* Content */}
-          <div className="flex-1 w-full max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20">
-                  <Icon size={32} className="text-primary" />
-                </div>
-                <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent" />
-              </div>
-              
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                {feature.title}
-              </h3>
-              
-              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
-                {feature.description}
-                {feature.highlightText && (
-                  <span className="text-primary font-bold ml-1">{feature.highlightText}</span>
-                )}
-              </p>
-              
-              <div className="space-y-4 mb-10">
-                {feature.tags.map((tag, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <CheckCircle2 size={20} className="text-primary shrink-0" />
-                    <span className="text-white/70 font-medium">{tag}</span>
+            {/* Content */}
+            <div className="flex-1 w-full max-w-2xl">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20">
+                    <Icon size={32} className="text-primary" />
                   </div>
-                ))}
-              </div>
-              
-              <button className="group flex items-center gap-2 text-primary font-bold text-lg hover:underline transition-all">
-                Integration starten
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </motion.div>
-          </div>
-          
-          {/* Image */}
-          <div className="flex-1 w-full">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: isEven ? 2 : -2 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className="relative aspect-video lg:aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl group"
-            >
-              <Image 
-                src={feature.image}
-                alt={feature.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
-              
-              <div className="absolute bottom-6 left-6 p-4 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 text-white font-bold flex items-center gap-2">
-                 <Zap className="text-primary" size={20} />
-                 Instant Connect
-              </div>
-            </motion.div>
-          </div>
+                  <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent" />
+                </div>
+                
+                <h3 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                  {feature.title}
+                </h3>
+                
+                <div className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
+                  <p>{feature.description}</p>
+                  {feature.highlightText && (
+                    <p className="text-primary font-bold mt-2">{feature.highlightText}</p>
+                  )}
+                </div>
+                
+                <div className="flex flex-wrap gap-3 mt-10">
+                  {feature.tags.map((tag, idx) => (
+                    <div 
+                      key={idx} 
+                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-semibold hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+                    >
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+            
+            {/* Image */}
+            <div className="flex-1 w-full">
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="relative aspect-video lg:aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl group"
+              >
+                <Image 
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                
+                <div className="absolute bottom-6 left-6 p-4 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 text-white font-bold flex items-center gap-2">
+                   <Zap className="text-primary" size={20} />
+                   Instant Connect
+                </div>
+              </motion.div>
+            </div>
         </div>
       </div>
       
