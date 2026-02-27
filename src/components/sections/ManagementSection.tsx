@@ -111,8 +111,8 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
             {/* Content */}
             <div className="flex-1 w-full max-w-2xl">
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -126,38 +126,38 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
                   animate={isInView ? { 
                     scale: [1, 1.05, 1], 
                     color: ["#ffffff", "#f97316", "#ffffff"],
-                    transition: { duration: 1.5, delay: 0.5 }
                   } : {}}
-                  className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight"
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                  className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
                 >
                   {feature.title}
                 </motion.h3>
                 
-                <div className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
+                <div className="text-xl md:text-2xl text-white/80 mb-8 leading-relaxed">
                   <p>{feature.description}</p>
                   {feature.highlightText && (
-                    <span className="text-primary font-bold mt-6 block text-2xl md:text-3xl leading-tight">
+                    <span className="text-primary font-bold mt-6 block text-2xl md:text-4xl leading-tight">
                       {feature.highlightText}
                     </span>
                   )}
                 </div>
                 
-                <div className="flex flex-wrap gap-3 mt-10">
+                <div className="flex flex-wrap gap-4 mt-12">
                   {feature.tags.map((tag, idx) => (
                     <motion.div 
                       key={idx} 
                       animate={isInView ? { 
-                        boxShadow: ["0 0 0px #f97316", "0 0 20px #f97316", "0 0 0px #f97316"],
+                        boxShadow: ["0 0 0px #f97316", "0 0 30px #f97316", "0 0 0px #f97316"],
                         borderColor: ["rgba(255,255,255,0.1)", "rgba(249,115,22,1)", "rgba(255,255,255,0.1)"],
                         color: ["rgba(255,255,255,0.7)", "rgba(249,115,22,1)", "rgba(255,255,255,0.7)"],
                         scale: [1, 1.1, 1]
                       } : {}}
                       transition={{ 
-                        duration: 1.2, 
-                        delay: 0.8 + (idx * 0.15),
+                        duration: 1.5, 
+                        delay: 1 + (idx * 0.2),
                         ease: "easeInOut"
                       }}
-                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-semibold transition-all duration-300"
+                      className="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white/70 text-base font-bold transition-all duration-300 shadow-lg"
                     >
                       {tag}
                     </motion.div>
@@ -169,10 +169,10 @@ const FeatureDetailSection = ({ feature, index }: { feature: Feature; index: num
             {/* Image */}
             <div className="flex-1 w-full">
               <motion.div
-                initial={{ opacity: 0, x: 200 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 200 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="relative aspect-video lg:aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl group"
+                initial={{ opacity: 0, x: 150, rotate: -5 }}
+                animate={isInView ? { opacity: 1, x: 0, rotate: 0 } : { opacity: 0, x: 150, rotate: -5 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative aspect-video lg:aspect-square rounded-[40px] overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group"
               >
                 <Image 
                   src={feature.image}
