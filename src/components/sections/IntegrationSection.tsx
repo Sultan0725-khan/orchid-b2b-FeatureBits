@@ -1,5 +1,8 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { ShoppingCart, Truck, Megaphone, Send } from 'lucide-react';
 
 /**
@@ -8,6 +11,19 @@ import { ShoppingCart, Truck, Megaphone, Send } from 'lucide-react';
  * Maintains dark gastronomy theme (Slate #475569) with orange highlights.
  * Features wide glassmorphism cards for Webshop, Lieferung, and Marketing.
  */
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  })
+};
+
 const IntegrationSection: React.FC = () => {
   return (
     <section 
@@ -20,19 +36,37 @@ const IntegrationSection: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 relative z-10">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight"
+          >
             Integration
-          </h2>
-          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed"
+          >
             Alle Kanäle und Systeme sauber verbunden – damit Daten automatisch fließen.
-          </p>
+          </motion.p>
         </div>
 
         {/* Bento Grid - Integration Specific */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           
           {/* Webshop Card */}
-          <div className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] backdrop-blur-sm flex flex-col">
+          <motion.div 
+            custom={0}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] backdrop-blur-sm flex flex-col"
+          >
             <div className="absolute inset-0 z-0">
               <Image 
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_13.png"
@@ -62,10 +96,17 @@ const IntegrationSection: React.FC = () => {
                 <span className="px-3.5 py-1.5 text-xs font-semibold rounded-full bg-primary/20 text-primary border border-primary/30 whitespace-nowrap">Einheitliche Daten</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Lieferung Card */}
-          <div className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] backdrop-blur-sm flex flex-col">
+          <motion.div 
+            custom={1}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] backdrop-blur-sm flex flex-col"
+          >
             <div className="absolute inset-0 z-0">
               <Image 
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_14.png"
@@ -94,10 +135,17 @@ const IntegrationSection: React.FC = () => {
                 <span className="px-3.5 py-1.5 text-xs font-semibold rounded-full bg-white/10 text-white/70 border border-white/5 whitespace-nowrap">Status nachvollziehbar</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Marketing Card (Wide) */}
-          <div className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] md:col-span-2 backdrop-blur-sm flex flex-col">
+          <motion.div 
+            custom={2}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/5 transition-all duration-500 hover:shadow-2xl hover:border-primary/40 hover:-translate-y-1 min-h-[320px] md:col-span-2 backdrop-blur-sm flex flex-col"
+          >
             <div className="absolute inset-0 z-0">
               <Image 
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/d7272520-44c5-4a40-95b9-82932f85a751-byte2bite-de/assets/images/images_15.png"
@@ -134,7 +182,7 @@ const IntegrationSection: React.FC = () => {
                 <Send className="w-12 h-12 text-primary" strokeWidth={1.5} />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Decorative elements */}
